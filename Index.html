@@ -1,0 +1,74 @@
+<!-- index.html:- contains frontend scripts -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>String operations</title>
+</head>
+
+<body style="text-align:center;">
+
+    <h1 style="color:green;">
+        GeeksForGeeks
+    </h1>
+
+    <input type="text" id="myString">
+
+    <button id="reverse" style="padding: 0.5em 0.5em;">
+        Reverse the String !!
+    </button>
+
+    <button id="palindrome" style="padding: 0.5em 0.5em;">
+        Check whether palindrome !!
+    </button>
+
+    <div id="answer" style="color: green;
+                font-size: 2em; 
+                padding: 1em;">
+    </div>
+
+    <!-- Script to perform one of the operations. -->
+    <script type="text/javascript">
+        let reverseButton = document.getElementById("reverse");
+        let palindromeButton = document.getElementById("palindrome");
+
+        //module containing the logic to reverse a string.
+        let module1 = '/reverseString.mjs';
+
+        //module containing the logic to check 
+        //whether the string is palindrome or not.
+        let module2 = '/isPalindrome.mjs';
+
+        reverseButton.addEventListener("click", () => {
+
+            //consuming the value of input
+            let str = document.getElementById("myString").value;
+
+            import(module1).then(module => {
+
+                document.getElementById("answer").innerHTML =
+                    module.reverseString(str);
+
+            });
+        });
+
+        palindromeButton.addEventListener("click", () => {
+
+            //consuming the value of input
+            let str = document.getElementById("myString").value;
+
+            import(module2).then(module => {
+
+                if (module.isPalindrome(str)) {
+                    document.getElementById("answer").innerHTML =
+                        "The string is a palindrome";
+                } else {
+                    document.getElementById("answer").innerHTML =
+                        "The string is not a palindrome";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
